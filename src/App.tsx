@@ -4,6 +4,9 @@ import { nanoid } from "nanoid";
 import AddProduct from "./components/AddProduct";
 import ProductTable from "./components/ProductTable";
 import jsConfetti from "js-confetti";
+import { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
+
 
 interface Product {
   id: string;
@@ -16,14 +19,14 @@ interface Product {
 const shops = [
   { id: 1, name: "Migros" },
   { id: 2, name: "Teknosa" },
-  { id: 3, name: "BİM" },
+  { id: 3, name: "Acar Market" },
 ];
 
 const categories = [
   { id: 1, name: "Elektronik" },
   { id: 2, name: "Şarküteri" },
   { id: 3, name: "Oyuncak" },
-  { id: 4, name: "Bakliyat" },
+  { id: 4, name: "Atıştırmalık" },
   { id: 5, name: "Fırın" },
 ];
 
@@ -61,14 +64,38 @@ const App: React.FC = () => {
     confetti.addConfetti();
   }
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #f0f0f0;
+    background-image: url("https://tr.pinterest.com/pin/16184879906770760/");
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+`;
+
+  const StyledH1 = styled.h1`
+  color: #132a13;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: underline;
+`;
+
   return (
-    <Container>
-      <h1>Alışveriş Listesi</h1>
+    <> 
+     <GlobalStyle />
+       <Container>
+      <StyledH1>Alısveris Listesi</StyledH1>
       <AddProduct addProduct={addProduct} shops={shops} categories={categories} />
-      <ProductTable products={products} toggleBought={toggleBought} deleteProduct={deleteProduct} />
+      <ProductTable products={products} toggleBought={toggleBought} deleteProduct={deleteProduct} shops={shops} categories={categories} />
     </Container> 
-  );
 
-};
 
+
+    </>
+   );
+  };
 export default App;
